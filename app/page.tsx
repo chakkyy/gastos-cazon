@@ -4,12 +4,12 @@ import { useState, useEffect, useMemo } from 'react';
 import { useFetchGastos } from '@/lib/hooks/use-fetch-gastos';
 import { getMonthName } from '@/lib/calculations';
 import { YearMonthSelector } from '@/components/dashboard/year-month-selector';
-import { CategoryToggles } from '@/components/dashboard/category-toggles';
 import { KpiSummary } from '@/components/dashboard/kpi-summary';
 import { ExpensesPieChart } from '@/components/dashboard/expenses-pie-chart';
 import { ExpensesTable } from '@/components/dashboard/expenses-table';
 import { NotesPanel } from '@/components/dashboard/notes-panel';
 import { BlurFade } from '@/components/magicui/blur-fade';
+import { TextAnimate } from '@/components/magicui/text-animate';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -191,14 +191,18 @@ export default function DashboardPage() {
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 pb-4 border-b border-border/50">
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs uppercase tracking-[0.3em] text-primary font-medium">
-                  Vida en casa
-                </span>
                 <ThemeToggle />
               </div>
-              <h1 className="text-4xl sm:text-5xl font-serif font-semibold tracking-tight text-foreground">
-                Gastos del hogar
-              </h1>
+              <TextAnimate
+                as="h1"
+                by="word"
+                animation="blurInUp"
+                duration={0.6}
+                once
+                className="text-4xl sm:text-5xl lg:text-6xl font-serif font-semibold tracking-tight text-foreground"
+              >
+                Gastos mensuales
+              </TextAnimate>
               <p className="text-muted-foreground text-base">
                 {getMonthName(selectedMonth)} {selectedYear}
               </p>
@@ -224,7 +228,7 @@ export default function DashboardPage() {
             </Alert>
           </BlurFade>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-6">
             <div className="space-y-6">
               <BlurFade delay={0.2}>
                 <KpiSummary
@@ -239,13 +243,6 @@ export default function DashboardPage() {
                   highlight={topExpense}
                 />
               </BlurFade>
-              <BlurFade delay={0.35}>
-                <CategoryToggles
-                  categories={Object.keys(selectedMonthData.categories)}
-                  enabledCategories={enabledCategories}
-                  onToggle={handleToggleCategory}
-                />
-              </BlurFade>
             </div>
             <div className="space-y-6">
               <BlurFade delay={0.25}>
@@ -253,6 +250,7 @@ export default function DashboardPage() {
                   categories={selectedMonthData.categories}
                   enabledCategories={enabledCategories}
                   total={totalSelected}
+                  onToggle={handleToggleCategory}
                 />
               </BlurFade>
               <BlurFade delay={0.4}>

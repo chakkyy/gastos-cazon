@@ -1,6 +1,7 @@
 'use client'
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { motion } from 'motion/react'
 
 interface YearMonthSelectorProps {
   selectedYear: number
@@ -41,31 +42,35 @@ export function YearMonthSelector({
 
   return (
     <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-      <Select value={selectedYear.toString()} onValueChange={(v) => onYearChange(Number(v))}>
-        <SelectTrigger className="w-full sm:w-32 rounded-full border-border/40 bg-card/70 shadow-sm backdrop-blur-sm hover:bg-card/90 transition-all">
-          <SelectValue placeholder="Año" />
-        </SelectTrigger>
-        <SelectContent>
-          {availableYears.map((year) => (
-            <SelectItem key={year} value={year.toString()}>
-              {year}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+        <Select value={selectedYear.toString()} onValueChange={(v) => onYearChange(Number(v))}>
+          <SelectTrigger className="w-full sm:w-32 rounded-full border-border/40 bg-card/70 shadow-sm backdrop-blur-sm hover:bg-card/90 transition-all">
+            <SelectValue placeholder="Año" />
+          </SelectTrigger>
+          <SelectContent>
+            {availableYears.map((year) => (
+              <SelectItem key={year} value={year.toString()}>
+                {year}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </motion.div>
 
-      <Select value={selectedMonth.toString()} onValueChange={(v) => onMonthChange(Number(v))}>
-        <SelectTrigger className="w-full sm:w-40 rounded-full border-border/40 bg-card/70 shadow-sm backdrop-blur-sm hover:bg-card/90 transition-all">
-          <SelectValue placeholder="Mes" />
-        </SelectTrigger>
-        <SelectContent>
-          {monthsForYear.map((month) => (
-            <SelectItem key={month} value={month.toString()}>
-              {MONTH_NAMES[month - 1]}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+        <Select value={selectedMonth.toString()} onValueChange={(v) => onMonthChange(Number(v))}>
+          <SelectTrigger className="w-full sm:w-40 rounded-full border-border/40 bg-card/70 shadow-sm backdrop-blur-sm hover:bg-card/90 transition-all">
+            <SelectValue placeholder="Mes" />
+          </SelectTrigger>
+          <SelectContent>
+            {monthsForYear.map((month) => (
+              <SelectItem key={month} value={month.toString()}>
+                {MONTH_NAMES[month - 1]}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </motion.div>
     </div>
   )
 }

@@ -4,7 +4,7 @@ const SPREADSHEET_ID =
   process.env.NEXT_PUBLIC_GOOGLE_SHEETS_SPREADSHEET_ID ||
   '1CX3g0sYAOuKGAHODU79KIOyEtKag0Aq9D6b3sGUJf88';
 const SHEET_RANGE =
-  process.env.NEXT_PUBLIC_GOOGLE_SHEETS_RANGE || 'Hoja 1!A:Z';
+  process.env.NEXT_PUBLIC_GOOGLE_SHEETS_RANGE || 'Hoja 1!A1:Z100';
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_SHEETS_API_KEY;
 
 interface SheetResponse {

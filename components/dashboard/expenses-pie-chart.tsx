@@ -8,6 +8,7 @@ import { CATEGORY_PALETTE } from '@/lib/palette'
 import { BorderBeam } from '@/components/magicui/border-beam'
 import { colors } from '@/lib/design-tokens'
 import { PieChart as PieIcon } from 'lucide-react'
+import { motion } from 'motion/react'
 
 interface ExpensesPieChartProps {
   categories: { name: string; value: number }[]
@@ -43,14 +44,19 @@ export function ExpensesPieChart({ categories, highlight }: ExpensesPieChartProp
           Distribución de gastos
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent>
         {data.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-border/50 bg-background/70 px-6 py-10 text-center text-sm text-muted-foreground">
             No hay gastos habilitados para graficar.
           </div>
         ) : (
-          <div className="relative">
-            <ChartContainer config={chartConfig} className="h-64 w-full aspect-[4/3]">
+          <motion.div
+            className="relative"
+            initial={{ scale: 0.85, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+          >
+            <ChartContainer config={chartConfig} className="h-[300px] sm:h-[400px] w-full aspect-square">
               <PieChart>
                 <ChartTooltip
                   content={
@@ -68,8 +74,8 @@ export function ExpensesPieChart({ categories, highlight }: ExpensesPieChartProp
                   data={data}
                   dataKey="value"
                   nameKey="name"
-                  innerRadius={60}
-                  outerRadius={90}
+                  innerRadius={90}
+                  outerRadius={140}
                   paddingAngle={2}
                   strokeWidth={2}
                 >
@@ -88,20 +94,12 @@ export function ExpensesPieChart({ categories, highlight }: ExpensesPieChartProp
               </PieChart>
             </ChartContainer>
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div className="rounded-full bg-card/90 px-5 py-3 text-center backdrop-blur-sm shadow-sm border border-border/40">
-                <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-medium">Total</p>
-                <p className="text-sm font-semibold text-foreground font-serif">{formatCurrency(total)}</p>
+              <div className="rounded-full bg-card/90 px-6 py-4 text-center backdrop-blur-sm shadow-sm border border-border/40">
+                <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-medium">Total</p>
+                <p className="text-base font-semibold text-foreground font-serif">{formatCurrency(total)}</p>
               </div>
             </div>
-          </div>
-        )}
-
-        {highlight && (
-          <div className="rounded-2xl border border-primary/20 bg-primary/5 px-4 py-3">
-            <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-medium">Más alto</p>
-            <p className="text-sm font-semibold text-foreground">{highlight.name}</p>
-            <p className="text-xs text-muted-foreground">{formatCurrency(highlight.amount)}</p>
-          </div>
+          </motion.div>
         )}
       </CardContent>
     </Card>

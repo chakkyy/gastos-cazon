@@ -11,24 +11,43 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { formatCurrency } from '@/lib/calculations'
-import { CATEGORY_PALETTE } from '@/lib/palette'
+import { SparklesText } from '@/components/magicui/sparkles-text'
+import { BorderBeam } from '@/components/magicui/border-beam'
+import { AuroraText } from '@/components/magicui/aurora-text'
+import { colors } from '@/lib/design-tokens'
+import { motion } from 'motion/react'
 
 interface ExpensesTableProps {
   categories: Record<string, number>
   enabledCategories: Set<string>
   total?: number
+  onToggle: (category: string, enabled: boolean) => void
 }
 
-export function ExpensesTable({ categories, enabledCategories, total }: ExpensesTableProps) {
-  const allKeys = Object.keys(categories)
-  const rows = Object.entries(categories).filter(([category]) => enabledCategories.has(category))
+export function ExpensesTable({ categories, enabledCategories, total, onToggle }: ExpensesTableProps) {
+  const rows = Object.entries(categories)
 
   return (
-    <Card className="border border-border/50 bg-card/90 shadow-sm backdrop-blur rounded-2xl">
+    <Card className="relative overflow-hidden border border-border/50 bg-card/90 shadow-sm backdrop-blur rounded-2xl">
+      <BorderBeam
+        size={120}
+        duration={8}
+        colorFrom={colors.plant}
+        colorTo={colors.beigeDark}
+        borderWidth={1.5}
+      />
       <CardHeader className="pb-2">
-        <CardTitle className="text-base font-semibold text-foreground">Tabla de gastos</CardTitle>
+        <CardTitle className="text-base font-semibold text-foreground flex items-center gap-2">
+          <SparklesText
+            sparklesCount={4}
+            colors={{ first: colors.plant, second: colors.beigeDark }}
+            className="text-base font-semibold !font-semibold"
+          >
+            Tabla de gastos
+          </SparklesText>
+        </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="space-y-3">
         <Table>
           <TableHeader>
             <TableRow>
@@ -40,41 +59,55 @@ export function ExpensesTable({ categories, enabledCategories, total }: Expenses
             {rows.length === 0 && (
               <TableRow>
                 <TableCell colSpan={2} className="py-6 text-center text-muted-foreground">
-                  No hay gastos habilitados.
+                  No hay gastos disponibles.
                 </TableCell>
               </TableRow>
             )}
             {rows.map(([category, amount]) => {
-              const colorIndex = allKeys.indexOf(category)
+              const enabled = enabledCategories.has(category)
               return (
-                <TableRow key={category} className="hover:bg-primary/5 transition-colors">
+                <motion.tr
+                  key={category}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => onToggle(category, !enabled)}
+                  className={`cursor-pointer select-none border-b transition-all duration-200 hover:bg-primary/5 ${
+                    enabled ? 'opacity-100' : 'opacity-40'
+                  }`}
+                >
                   <TableCell className="font-medium text-foreground">
-                    <div className="flex items-center gap-2.5">
-                      <span
-                        className="inline-block h-2 w-2 rounded-full shrink-0"
-                        style={{ backgroundColor: CATEGORY_PALETTE[colorIndex % CATEGORY_PALETTE.length] }}
-                      />
+                    <span className={`transition-all duration-200 ${!enabled ? 'line-through decoration-foreground/40' : ''}`}>
                       {category}
-                    </div>
+                    </span>
                   </TableCell>
                   <TableCell className="text-right font-mono text-sm text-foreground/90">
-                    {formatCurrency(amount)}
+                    <span className={`transition-all duration-200 ${!enabled ? 'line-through decoration-foreground/40' : ''}`}>
+                      {formatCurrency(amount)}
+                    </span>
                   </TableCell>
-                </TableRow>
+                </motion.tr>
               )
             })}
           </TableBody>
-          {rows.length > 0 && total !== undefined && (
+          {total !== undefined && (
             <TableFooter>
-              <TableRow className="border-t-2 border-primary/15 bg-primary/5 hover:bg-primary/5">
-                <TableCell className="font-semibold text-foreground">Total</TableCell>
-                <TableCell className="text-right font-mono text-sm font-semibold text-foreground">
-                  {formatCurrency(total)}
+              <TableRow className="border-t-2 border-primary/20 bg-gradient-to-r from-primary/10 via-primary/5 to-accent/10 hover:bg-primary/10">
+                <TableCell className="font-bold text-foreground text-base">Total</TableCell>
+                <TableCell className="text-right font-mono font-bold text-base">
+                  <AuroraText
+                    colors={[colors.plant, colors.olive, colors.plantDark, colors.beigeDark]}
+                    speed={1.5}
+                    className="font-bold"
+                  >
+                    {formatCurrency(total)}
+                  </AuroraText>
                 </TableCell>
               </TableRow>
             </TableFooter>
           )}
         </Table>
+        <p className="text-xs text-muted-foreground text-center pt-1">
+          Tocá un gasto para quitarlo del total
+        </p>
       </CardContent>
     </Card>
   )

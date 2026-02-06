@@ -1,6 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AnimatedShinyText } from '@/components/magicui/animated-shiny-text'
 import { NotebookPen } from 'lucide-react'
 
 interface NotesPanelProps {
@@ -16,7 +17,7 @@ export function NotesPanel({ notes }: NotesPanelProps) {
         <CardHeader className="pb-2 pl-6">
           <CardTitle className="text-sm font-semibold text-muted-foreground flex items-center gap-2">
             <NotebookPen className="h-4 w-4 text-primary" />
-            Notas
+            <AnimatedShinyText shimmerWidth={80}>Notas</AnimatedShinyText>
           </CardTitle>
         </CardHeader>
         <CardContent className="pl-6">

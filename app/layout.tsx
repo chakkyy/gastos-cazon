@@ -20,7 +20,7 @@ const dmSerif = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Gastos del Hogar',
+  title: 'Gastos Mensuales',
   description: 'Dashboard de gastos mensuales del hogar',
   generator: 'v0.app',
 };

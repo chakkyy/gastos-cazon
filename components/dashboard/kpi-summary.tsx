@@ -2,7 +2,6 @@
 
 import { MagicCard } from '@/components/magicui/magic-card'
 import { NumberTicker } from '@/components/magicui/number-ticker'
-import { SparklesText } from '@/components/magicui/sparkles-text'
 import { formatCurrency } from '@/lib/calculations'
 import { colors } from '@/lib/design-tokens'
 import { Wallet, Crown } from 'lucide-react'
@@ -33,7 +32,10 @@ export function KpiSummary({ totalExpenses, sheetTotal, topExpense }: KpiSummary
           <div className="flex items-baseline gap-1">
             <span className="text-lg text-muted-foreground font-serif">$</span>
             <NumberTicker
+              key={totalExpenses}
               value={totalExpenses}
+              damping={30}
+              stiffness={200}
               className="text-3xl font-semibold text-foreground font-serif tabular-nums tracking-tight"
             />
           </div>
@@ -61,13 +63,9 @@ export function KpiSummary({ totalExpenses, sheetTotal, topExpense }: KpiSummary
           </div>
           {topExpense ? (
             <div className="space-y-1">
-              <SparklesText
-                sparklesCount={5}
-                colors={{ first: colors.plant, second: colors.beigeDark }}
-                className="text-xl font-semibold text-foreground font-serif !font-semibold"
-              >
+              <p className="text-xl font-semibold text-foreground font-serif">
                 {topExpense.name}
-              </SparklesText>
+              </p>
               <p className="text-sm text-muted-foreground">
                 {formatCurrency(topExpense.amount)}
               </p>
