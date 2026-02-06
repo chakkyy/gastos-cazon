@@ -13,7 +13,6 @@ import {
 import { formatCurrency } from '@/lib/calculations'
 import { SparklesText } from '@/components/magicui/sparkles-text'
 import { BorderBeam } from '@/components/magicui/border-beam'
-import { AuroraText } from '@/components/magicui/aurora-text'
 import { colors } from '@/lib/design-tokens'
 import { motion } from 'motion/react'
 
@@ -79,7 +78,7 @@ export function ExpensesTable({ categories, enabledCategories, total, onToggle }
                       {category}
                     </span>
                   </TableCell>
-                  <TableCell className="text-right font-mono text-sm text-foreground/90">
+                  <TableCell className="text-right font-mono text-sm font-semibold text-foreground">
                     <span className={`transition-all duration-200 ${!enabled ? 'line-through decoration-foreground/40' : ''}`}>
                       {formatCurrency(amount)}
                     </span>
@@ -90,16 +89,10 @@ export function ExpensesTable({ categories, enabledCategories, total, onToggle }
           </TableBody>
           {total !== undefined && (
             <TableFooter>
-              <TableRow className="border-t-2 border-primary/20 bg-gradient-to-r from-primary/10 via-primary/5 to-accent/10 hover:bg-primary/10">
+              <TableRow className="border-t-2 border-primary/20 bg-primary/8 hover:bg-primary/10">
                 <TableCell className="font-bold text-foreground text-base">Total</TableCell>
-                <TableCell className="text-right font-mono font-bold text-base">
-                  <AuroraText
-                    colors={[colors.plant, colors.olive, colors.plantDark, colors.beigeDark]}
-                    speed={1.5}
-                    className="font-bold"
-                  >
-                    {formatCurrency(total)}
-                  </AuroraText>
+                <TableCell className="text-right font-mono font-bold text-base text-foreground">
+                  {formatCurrency(total)}
                 </TableCell>
               </TableRow>
             </TableFooter>

@@ -56,7 +56,7 @@ export function ExpensesPieChart({ categories, highlight }: ExpensesPieChartProp
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
-            <ChartContainer config={chartConfig} className="h-[300px] sm:h-[400px] w-full aspect-square">
+            <ChartContainer config={chartConfig} className="h-[380px] sm:h-[480px] w-full aspect-square">
               <PieChart>
                 <ChartTooltip
                   content={
@@ -74,8 +74,8 @@ export function ExpensesPieChart({ categories, highlight }: ExpensesPieChartProp
                   data={data}
                   dataKey="value"
                   nameKey="name"
-                  innerRadius={90}
-                  outerRadius={140}
+                  innerRadius={110}
+                  outerRadius={170}
                   paddingAngle={2}
                   strokeWidth={2}
                 >
@@ -93,12 +93,6 @@ export function ExpensesPieChart({ categories, highlight }: ExpensesPieChartProp
                 </Pie>
               </PieChart>
             </ChartContainer>
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <div className="rounded-full bg-card/90 px-6 py-4 text-center backdrop-blur-sm shadow-sm border border-border/40">
-                <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-medium">Total</p>
-                <p className="text-base font-semibold text-foreground font-serif">{formatCurrency(total)}</p>
-              </div>
-            </div>
           </motion.div>
         )}
       </CardContent>

@@ -6,7 +6,7 @@ export const CATEGORY_PALETTE = [
   colors.plantDark,
   colors.oliveLight,
   colors.beigeDark,
-  colors.accentPink,
+  colors.beige,
   colors.plantLight,
   colors.oliveDark,
 ]
