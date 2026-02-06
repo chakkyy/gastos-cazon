@@ -36,7 +36,7 @@ next-env.d.ts
 design-system.json
 
 # magic ui monorepo (external dependency, not part of this project)
-magicui/
+/magicui/
 
 # vercel
 .vercel
