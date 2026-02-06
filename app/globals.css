@@ -1,0 +1,240 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Design System: Deep Jungle / Plant / Olive / Beige ────── */
+
+:root {
+  /* ── Raw design tokens ─────────────────────────────── */
+  --ds-deep-jungle: #3F4441;
+  --ds-deep-jungle-light: #575E5A;
+  --ds-deep-jungle-dark: #262927;
+  --ds-plant: #A7C280;
+  --ds-plant-light: #BED2A2;
+  --ds-plant-dark: #8FB15D;
+  --ds-olive: #5F7240;
+  --ds-olive-light: #7A9252;
+  --ds-olive-dark: #43512D;
+  --ds-beige: #F7E5D7;
+  --ds-beige-light: #FEFFFF;
+  --ds-beige-dark: #EEC9AC;
+  --ds-accent-pink: #EFCED5;
+  --ds-error: #CC9275;
+
+  /* ── Semantic tokens ───────────────────────────────── */
+  --background: var(--ds-beige-light);
+  --foreground: var(--ds-deep-jungle);
+  --card: var(--ds-beige);
+  --card-foreground: var(--ds-deep-jungle);
+  --popover: var(--ds-plant-light);
+  --popover-foreground: var(--ds-deep-jungle);
+  --primary: var(--ds-plant);
+  --primary-foreground: var(--ds-deep-jungle-light);
+  --secondary: var(--ds-olive);
+  --secondary-foreground: var(--ds-beige-light);
+  --muted: var(--ds-olive-light);
+  --muted-foreground: var(--ds-deep-jungle-light);
+  --accent: var(--ds-beige-dark);
+  --accent-foreground: var(--ds-deep-jungle);
+  --destructive: var(--ds-error);
+  --destructive-foreground: var(--ds-beige-light);
+  --border: var(--ds-deep-jungle-light);
+  --input: var(--ds-beige);
+  --ring: var(--ds-olive-light);
+  --chart-1: var(--ds-plant);
+  --chart-2: var(--ds-olive);
+  --chart-3: var(--ds-plant-dark);
+  --chart-4: var(--ds-olive-light);
+  --chart-5: var(--ds-beige-dark);
+  --radius: 16px;
+  --sidebar: var(--ds-deep-jungle);
+  --sidebar-foreground: var(--ds-beige-light);
+  --sidebar-primary: var(--ds-plant);
+  --sidebar-primary-foreground: var(--ds-deep-jungle-light);
+  --sidebar-accent: var(--ds-beige-dark);
+  --sidebar-accent-foreground: var(--ds-deep-jungle);
+  --sidebar-border: var(--ds-deep-jungle-light);
+  --sidebar-ring: var(--ds-olive-light);
+}
+
+.dark {
+  --background: var(--ds-deep-jungle-dark);
+  --foreground: var(--ds-beige-light);
+  --card: var(--ds-deep-jungle);
+  --card-foreground: var(--ds-beige-light);
+  --popover: var(--ds-deep-jungle);
+  --popover-foreground: var(--ds-beige-light);
+  --primary: var(--ds-plant-light);
+  --primary-foreground: var(--ds-deep-jungle-dark);
+  --secondary: var(--ds-olive-light);
+  --secondary-foreground: var(--ds-beige-light);
+  --muted: var(--ds-olive-dark);
+  --muted-foreground: var(--ds-beige-dark);
+  --accent: var(--ds-beige-dark);
+  --accent-foreground: var(--ds-deep-jungle-dark);
+  --destructive: var(--ds-error);
+  --destructive-foreground: var(--ds-beige-light);
+  --border: var(--ds-deep-jungle-light);
+  --input: var(--ds-deep-jungle);
+  --ring: var(--ds-plant-light);
+  --chart-1: var(--ds-plant-light);
+  --chart-2: var(--ds-olive-light);
+  --chart-3: var(--ds-plant);
+  --chart-4: var(--ds-plant-dark);
+  --chart-5: var(--ds-beige-dark);
+  --sidebar: var(--ds-deep-jungle-dark);
+  --sidebar-foreground: var(--ds-beige-light);
+  --sidebar-primary: var(--ds-plant-light);
+  --sidebar-primary-foreground: var(--ds-deep-jungle-dark);
+  --sidebar-accent: var(--ds-beige-dark);
+  --sidebar-accent-foreground: var(--ds-deep-jungle-dark);
+  --sidebar-border: var(--ds-deep-jungle-light);
+  --sidebar-ring: var(--ds-plant-light);
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-mono: 'Gladiola', 'Courier New', cursive;
+  --font-serif: var(--font-display);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ── Botanical Canvas Background ─────────────────────────────── */
+
+.organic-canvas {
+  position: relative;
+  background:
+    radial-gradient(1200px 600px at 8% -8%, color-mix(in srgb, var(--ds-plant) 15%, transparent), transparent 60%),
+    radial-gradient(900px 500px at 92% 8%, color-mix(in srgb, var(--ds-beige-dark) 18%, transparent), transparent 55%),
+    radial-gradient(600px 400px at 50% 100%, color-mix(in srgb, var(--ds-olive) 8%, transparent), transparent 50%),
+    linear-gradient(180deg, var(--ds-beige-light), var(--ds-beige));
+  overflow: hidden;
+}
+
+.organic-canvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.organic-canvas > * {
+  position: relative;
+  z-index: 1;
+}
+
+.dark .organic-canvas {
+  background:
+    radial-gradient(1200px 600px at 8% -8%, color-mix(in srgb, var(--ds-plant-dark) 8%, transparent), transparent 60%),
+    radial-gradient(900px 500px at 92% 8%, color-mix(in srgb, var(--ds-beige-dark) 6%, transparent), transparent 55%),
+    radial-gradient(600px 400px at 50% 100%, color-mix(in srgb, var(--ds-olive) 5%, transparent), transparent 50%),
+    linear-gradient(180deg, var(--ds-deep-jungle-dark), #1e211f);
+}
+
+.dark .organic-canvas::before {
+  opacity: 0.08;
+  mix-blend-mode: soft-light;
+}
+
+/* ── Entrance Animations ─────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* ── ShimmerButton Keyframes ─────────────────────────────────── */
+
+@keyframes shimmer-slide {
+  to {
+    transform: translateX(calc(100cqw - 100%));
+  }
+}
+
+@keyframes spin-around {
+  0% { transform: translateZ(0) rotate(0); }
+  15%, 35% { transform: translateZ(0) rotate(90deg); }
+  65%, 85% { transform: translateZ(0) rotate(270deg); }
+  100% { transform: translateZ(0) rotate(360deg); }
+}
+
+.animate-shimmer-slide {
+  animation: shimmer-slide var(--speed) ease-in-out infinite alternate;
+}
+
+.animate-spin-around {
+  animation: spin-around calc(var(--speed) * 2) infinite linear;
+}
